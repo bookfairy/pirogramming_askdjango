@@ -24,3 +24,9 @@ class Post(models.Model):
     status = models.CharField(max_length=1, choices=STATUC_CHOICE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='내용')
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return self.title
