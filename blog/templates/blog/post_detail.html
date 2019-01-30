@@ -9,5 +9,14 @@
 <h1>{{ post.title }}</h1>
 <p>{{ post.content|linebreaks }}</p>
 
+<hr>
+<h2>댓글 목록</h2>
+<ul>
+    {% for comment in post.comment_set.all %}
+        <li>{{ comment.author }}의 댓글 :
+            {{ comment.message }}<br>
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
