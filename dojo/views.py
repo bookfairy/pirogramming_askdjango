@@ -4,6 +4,10 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 
+def post_new(request):
+
+    pass
+
 def mysum(request, numbers):
     result = sum(list(map(lambda s: int(s or 0), numbers.split("/"))))
     return HttpResponse(result)
