@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Post
+from .models import Post, Comment, Tag
 
 
 @admin.register(Post)
@@ -26,3 +26,11 @@ class PostAdmin(admin.ModelAdmin):
     make_published.short_description = '지정 포스팅을 Publish합니다.'
 
 # admin.site.register(Post)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
