@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AskDjango's Blog</title>
-</head>
-<body>
+{% extends 'blog/layout.html' %}
 
-<h1>AskDjango</h1>
-<p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되어드리겠습니다. :)</p>
+{% block content %}
+    <h1>AskDjango</h1>
+    <p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되어드리겠습니다. :)</p>
 
-<form action="" method="get">
-    <input type="text" name="q" value="{{ q }}">
-    <input type="submit" value="검색하기">
-</form>
+    <form action="" method="get">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit" value="검색하기">
+    </form>
 
-<ul>
-{% for post in post_list %}
-    <li>
-    <a href="/blog/{{ post.id }}">{{ post.title }}</a>
-    {{ post.status }}
-    <small>by {{ post.author }}</small>
-    <small>by {{ post.created_at }}</small>
-    <small>by {{ post.updated_at }}</small>
-    </li>
-{% endfor %}
-</ul>
+    <ul>
+        {% for post in post_list %}
+            <li>
+                <a href="/blog/{{ post.id }}">{{ post.title }}</a>
+                {{ post.status }}
+                <small>by {{ post.author }}</small>
+                <small>by {{ post.created_at }}</small>
+                <small>by {{ post.updated_at }}</small>
+            </li>
+        {% endfor %}
+    </ul>
 
-</body>
-</html>
+{% endblock %}
