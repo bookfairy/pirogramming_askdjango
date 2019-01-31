@@ -1,6 +1,7 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Post
+from .forms import PostForm
 
 
 def post_list(request):
@@ -14,6 +15,7 @@ def post_list(request):
         'q': q,
     })
 
+
 def post_detail(request, id):
     # try:
     #     post = Post.objects.get(id=id)
@@ -25,3 +27,30 @@ def post_detail(request, id):
     return render(request, 'blog/post_detail.html', {
         'post': post,
     })
+
+
+def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save()
+            # post.user = request.user
+            # post.save()
+        return redirect(post)
+    else:
+        form = PostForm()
+
+    return render(request, 'blog/post_form.html', {'form': form, })
+
+
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)  # post.get_absolute_url() => post detail
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_form.html', {'form': form, })
