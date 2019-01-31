@@ -1,12 +1,35 @@
 import os
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import PostForm
+from .models import Post
 
 
 def post_new(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            # post = Post()
+            # post.title = form.cleaned_data['title']
+            # post.content = form.cleaned_data['content']
+            # post.save()
 
-    pass
+            # post = Post(title=form.cleaned_data['title'],
+            #             content=form.cleaned_data['content'])
+            # post.save()
+
+            # post = Post.objects.create(title=form.cleaned_data['title'],
+            #                            content=form.cleaned_data['content'])
+
+            post = Post.objects.create(**form.cleaned_data)
+
+            return redirect('/dojo/')
+    else:
+        form = PostForm()
+
+    return render(request, 'dojo/post_form.html', {'form': form, })
+
 
 def mysum(request, numbers):
     result = sum(list(map(lambda s: int(s or 0), numbers.split("/"))))
