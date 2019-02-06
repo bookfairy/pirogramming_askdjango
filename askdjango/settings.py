@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.blog',
             ],
         },
     },
@@ -123,6 +124,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/profile'
+LOGOUT_REDIRECT_URL = None
+AUTH_USER_MODEL = 'auth.User'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
